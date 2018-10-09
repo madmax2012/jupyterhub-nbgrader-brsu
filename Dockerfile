@@ -37,8 +37,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libnss-ldap libpam-ldap ld
 COPY config/ldap.conf /etc/ldap.conf
 COPY config/nsswitch.conf /etc/nsswitch.conf
 RUN echo "session optional			pam_systemd.so" >> /etc/pam.d/common-session
-RUN useradd max -p 123456
 
+# Setup local account for Admin user and return a random password
+# Enforce password change at first login
+RUN PASSWORD=$(date +%s|sha256sum|base64|head -c 16)
+RUN echo 'pass for user max:' $PASSWORD
+RUN useradd max 
+RUN echo $PASSWORD 
+RUN echo -e "$PASSWORD \n $PASSWORD \n" | sudo passwd max
+#RUN echo max:$PASSWORD | chpasswd
+RUN chage -d 0 max
 #COPY skel /etc/skel
 
 # install Python + NodeJS with conda
