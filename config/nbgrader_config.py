@@ -16,14 +16,18 @@ c.CourseDirectory.db_assignments = [dict(name="ps1")]
 c.CourseDirectory.db_students = [
     dict(id="bitdiddle", first_name="Ben", last_name="Bitdiddle"),
     dict(id="hacker", first_name="Alyssa", last_name="Hacker"),
-    dict(id="reasoner", first_name="Louis", last_name="Reasoner")
+    dict(id="reasoner", first_name="Louis", last_name="Reasoner"),
+    dict(id="mmensi2s", first_name="", last_name=""),
+    dict(id="aaster2m", first_name="", last_name=""),
+    dict(id="vulric2s", first_name="", last_name=""),
+    dict(id="", first_name="", last_name=""),
 ]
 
 c.ClearSolutions.begin_solution_delimeter = "BEGIN MY SOLUTION"
 c.ClearSolutions.end_solution_delimeter = "END MY SOLUTION"
 c.ClearSolutions.code_stub = {
     "python": "# your code here\nraise NotImplementedError",
-    "SWI-Prolog-dev": "# your code here\nraise NotImplementedError",
+    "swipl": "/* QUERYSTART */ \n\n\n\n /* QUERYEND */",
 }
 
 ##c.IncludeHeaderFooter.header = "source/header.ipynb"
