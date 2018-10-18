@@ -43,19 +43,31 @@ def exec_swipl(code):
     with open(code_path, 'w') as rules:
         rules.write(''.join(textlist))
     tmp_dir = tempfile.mkdtemp()
-    #tmp_dir = tempfile.TemporaryDirectory()
     code2_path = op.join(tmp_dir, 'code2.pl')
     with open(code_path, 'w') as rules:
          rules.write(''.join(textlist))
     #with tempfile.TemporaryDirectory() as temp_dir
-    
+     
     #rules_target_path
     ''' Parser code begins here '''
 
 
     os.system("swipl {0:s} > {1:s}  2>&1 ".format(code_path, output_path))  # source_path, program_path))
     #out = os.system("swipl {0:s} ".format(source_path))  # source_path, program_path))
+    l = open(output_path, 'r')
+    lines = l.readlines()
+    l.close()
+    lines = lines[:-9]
+    
+    t = open(output_path, 'w')
+    for line in lines:
+        t.write(line)
+    t.close()
+    #iwith open(output_path, 'w') as output:
+    #    output.write(lines)
+    
     f = open(output_path, 'r')
+    
     return f.read()
 
 def setup_env():
