@@ -27,7 +27,7 @@ LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get -y install vim htop  wget git bzip2 swi-prolog locate sudo  && \
+    apt-get -y install texlive-xetex pandoc vim htop  wget git bzip2 swi-prolog locate sudo  && \
     apt-get purge && \
     apt-get clean #&& \
 ENV LANG C.UTF-8
@@ -40,13 +40,13 @@ RUN echo "session optional			pam_systemd.so" >> /etc/pam.d/common-session
 
 # Setup local account for Admin user and return a random password
 # Enforce password change at first login
-RUN PASSWORD=$(date +%s|sha256sum|base64|head -c 16)
-RUN echo 'pass for user max:' $PASSWORD
-RUN useradd max 
-RUN echo $PASSWORD 
-RUN echo -e "$PASSWORD \n $PASSWORD \n" | sudo passwd max
-#RUN echo max:$PASSWORD | chpasswd
-RUN chage -d 0 max
+#RUN PASSWORD=$(date +%s|sha256sum|base64|head -c 16)
+#RUN echo 'pass for user max:' $PASSWORD
+#RUN useradd max 
+#RUN echo $PASSWORD 
+# RUN echo -e "$PASSWORD\n$PASSWORD\n" | sudo passwd max
+#RUN echo -e  "max:$PASSWORD" | chpasswd
+#RUN chage -d 0 max
 #COPY skel /etc/skel
 
 # install Python + NodeJS with conda
@@ -57,7 +57,7 @@ RUN wget -q https://repo.continuum.io/miniconda/Miniconda3-4.5.1-Linux-x86_64.sh
       python=3.6 sqlalchemy tornado jinja2 traitlets requests pip pycurl \
       nodejs configurable-http-proxy && \
     /opt/conda/bin/pip install --upgrade pip&& \
-    /opt/conda/bin/pip install --upgrade prompt-toolkit backports.tempfile nbgrader notebook matplotlib numpy scipy&& \
+    /opt/conda/bin/pip install --upgrade prompt-toolkit backports.tempfile nbgrader notebook matplotlib numpy scipy opencv-python seaborn pandas  pandas-summary  scikit-image  imageio  sklearn&& \
     rm /tmp/miniconda.sh
 ENV PATH=/opt/conda/bin:$PATH
 
