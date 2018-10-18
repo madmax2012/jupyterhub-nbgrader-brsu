@@ -4,6 +4,6 @@
          "-f",
          "{connection_file}"
         ],
-"display_name": "SWI-Prolog-dev"
+"display_name": "SWI-Prolog"
 }
 
